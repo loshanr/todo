@@ -4,10 +4,10 @@ part of 'app_bloc.dart';
 abstract class AppEvent extends Equatable {}
 
 class AppStatusChanged extends AppEvent {
-  final AppStatus status;
+  final User? user;
 
-  AppStatusChanged(this.status);
+  AppStatusChanged(this.user);
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [user];
 }

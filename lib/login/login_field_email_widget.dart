@@ -12,11 +12,12 @@ class LoginFieldEmailWidget extends StatelessWidget {
         return TextFormField(
           decoration: InputDecoration(
             hintText: 'Email',
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: const TextStyle(color: Colors.white),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
+          onChanged: (value) => context.read<LoginBloc>().add(UserEmailChanged(value)),
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
         );

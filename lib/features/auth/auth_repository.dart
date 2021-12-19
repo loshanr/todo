@@ -53,6 +53,10 @@ class AuthRepository {
     }
   }
 
+  Stream<User?> get onAuthStateChanged {
+    return _firebaseAuth.authStateChanges();
+  }
+
   Future<AuthResult> getCurrentUser() async {
     User? user = _firebaseAuth.currentUser;
     if (user != null) {

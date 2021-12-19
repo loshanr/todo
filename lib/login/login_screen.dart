@@ -15,29 +15,43 @@ class LoginScreen extends StatelessWidget {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.blue,
-            body: Container(
-              margin: EdgeInsets.all(8),
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: SizedBox(),
+            body: Stack(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Expanded(
+                        child: SizedBox(),
+                      ),
+                      Text('TODO App', style: Theme.of(context).textTheme.headline6!.apply(color: Colors.white)),
+                      const Expanded(
+                        child: SizedBox(),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white38,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const LoginFormWidget(),
+                      ),
+                    ],
                   ),
-                  Text('TODO App', style: Theme.of(context).textTheme.headline6!.apply(color: Colors.white)),
-                  Expanded(
-                    child: SizedBox(),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white38,
-                      borderRadius: BorderRadius.circular(8),
+                ),
+                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                  return Visibility(
+                    visible: state.isLoading,
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(color: Colors.black54),
+                      child: const CircularProgressIndicator(),
                     ),
-                    child: LoginFormWidget(),
-                  ),
-                ],
-              ),
+                  );
+                }),
+              ],
             ),
           ),
         ),

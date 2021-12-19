@@ -4,9 +4,10 @@ enum AppStatus { unknown, unauthenticated, authenticated }
 
 class AppState extends Equatable {
   final AppStatus status;
+  final User? user;
 
-  AppState({this.status = AppStatus.unauthenticated});
+  const AppState({this.status = AppStatus.unknown, this.user});
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [status, user];
 }

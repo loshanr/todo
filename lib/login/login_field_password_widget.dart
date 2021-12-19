@@ -8,11 +8,11 @@ class LoginFieldPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      builder: (context, state) {
+      builder: (_, state) {
         return TextFormField(
           decoration: InputDecoration(
             hintText: 'Password',
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: const TextStyle(color: Colors.white),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -21,7 +21,8 @@ class LoginFieldPasswordWidget extends StatelessWidget {
               onTap: () => context.read<LoginBloc>().add(LoginPasswordObsecurityChanged()),
             ),
           ),
-          obscureText: true,
+          onChanged: (value) => context.read<LoginBloc>().add(UserPasswordChanged(value)),
+          obscureText: state.obsecurePassword,
           textInputAction: TextInputAction.done,
         );
       },

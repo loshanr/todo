@@ -5,8 +5,17 @@ import 'package:todo_app/home/home_screen.dart';
 import 'package:todo_app/login/login_screen.dart';
 import 'package:todo_app/splash_screen.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +28,19 @@ class App extends StatelessWidget {
         return BlocListener<AppBloc, AppState>(
           listener: (_, state) {
             if (state.status == AppStatus.unauthenticated) {
-              Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+              _navigator.pushNamedAndRemoveUntil('/login', (route) => false);
             } else if (state.status == AppStatus.authenticated) {
-              Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+              _navigator.pushNamedAndRemoveUntil('/home', (route) => false);
             }
           },
           child: child,
         );
       },
+      navigatorKey: _navigatorKey,
       routes: {
-        '/': (context) => LoginScreen(),
-        '/login': (context) => LoginScreen(),
-        // '/signup': (context) => SignupScreen(),
-        '/home': (context) => HomeScreen(),
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

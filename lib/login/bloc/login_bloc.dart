@@ -10,14 +10,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc()
       : _authRepository = AuthRepository(),
-        super(LoginState()) {
-    on<LoginEvent>((event, emit) {
-      on<UserEmailChanged>(_onUserEmailChanged);
-      on<UserPasswordChanged>(_onUserPasswordChanged);
-      on<LoginPasswordObsecurityChanged>(_onLoginPasswordObsecurityChanged);
-      on<LoginSubmitted>(_onLoginSubmitted);
-      on<SignupSubmitted>(_onSignupSignupSubmitted);
-    });
+        super(const LoginState()) {
+    on<UserEmailChanged>(_onUserEmailChanged);
+    on<UserPasswordChanged>(_onUserPasswordChanged);
+    on<LoginPasswordObsecurityChanged>(_onLoginPasswordObsecurityChanged);
+    on<LoginSubmitted>(_onLoginSubmitted);
+    on<SignupSubmitted>(_onSignupSignupSubmitted);
   }
 
   void _onUserEmailChanged(UserEmailChanged event, Emitter<LoginState> emit) {
