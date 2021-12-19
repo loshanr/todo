@@ -30,7 +30,8 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: ListView.builder(
+        child: ListView.separated(
+          separatorBuilder: (context, index) => Divider(color: Colors.black),
           itemCount: 3,
           itemBuilder: (_, index) {
             return ListTile(
