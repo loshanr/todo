@@ -17,6 +17,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       : _authRepository = AuthRepository(),
         super(const AppState()) {
     on<AppStatusChanged>(_onAppStatusChanged);
+    on<AppSignoutRequested>(_onAppSignoutRequested);
     _authStreamSubscription = _authRepository.onAuthStateChanged.listen((user) {
       add(AppStatusChanged(user));
     });
@@ -34,5 +35,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     } else {
       emit(const AppState(status: AppStatus.unauthenticated));
     }
+  }
+
+  void _onAppSignoutRequested(AppSignoutRequested event, Emitter<AppState> emit) {
+    _authRepository.signOut();
   }
 }

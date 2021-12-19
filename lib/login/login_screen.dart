@@ -41,16 +41,18 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                  return Visibility(
-                    visible: state.isLoading,
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(color: Colors.black54),
-                      child: const CircularProgressIndicator(),
-                    ),
-                  );
-                }),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (_, state) {
+                    return Visibility(
+                      visible: state.isLoading,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(color: Colors.black54),
+                        child: const CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

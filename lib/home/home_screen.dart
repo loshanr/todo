@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/app/bloc/app_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -69,6 +71,12 @@ class HomeScreen extends StatelessWidget {
               title: Text('About'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Sign Out'),
+              onTap: () {
+                context.read<AppBloc>().add(AppSignoutRequested());
               },
             ),
           ],

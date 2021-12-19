@@ -1,7 +1,10 @@
 part of 'app_bloc.dart';
 
 @immutable
-abstract class AppEvent extends Equatable {}
+abstract class AppEvent extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class AppStatusChanged extends AppEvent {
   final User? user;
@@ -11,3 +14,5 @@ class AppStatusChanged extends AppEvent {
   @override
   List<Object?> get props => [user];
 }
+
+class AppSignoutRequested extends AppEvent {}

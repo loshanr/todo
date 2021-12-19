@@ -31,9 +31,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onLoginSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
+    emit(state.copyWith(isLoading: true));
     final result =
         await _authRepository.signInWithEmailAndPassword(email: state.userEmail, password: state.userPassword);
-    emit(state.copyWith(isLoading: true));
     if (result.error == null) {
       emit(state.copyWith(isLoading: false));
     } else {
@@ -42,9 +42,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onSignupSignupSubmitted(SignupSubmitted event, Emitter<LoginState> emit) async {
+    emit(state.copyWith(isLoading: true));
     final result =
         await _authRepository.signUpWithEmailAndPassword(email: state.userEmail, password: state.userPassword);
-    emit(state.copyWith(isLoading: true));
     if (result.error == null) {
       emit(state.copyWith(isLoading: false));
     } else {
