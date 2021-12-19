@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/login/bloc/login_bloc.dart';
 import 'package:todo_app/login/login_form_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -6,33 +8,36 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.blue,
-          body: Container(
-            margin: EdgeInsets.all(8),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: SizedBox(),
-                ),
-                Text('TODO App', style: Theme.of(context).textTheme.headline6!.apply(color: Colors.white)),
-                Expanded(
-                  child: SizedBox(),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white38,
-                    borderRadius: BorderRadius.circular(8),
+    return BlocProvider(
+      create: (_) => LoginBloc(),
+      child: Container(
+        color: Colors.blue,
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.blue,
+            body: Container(
+              margin: EdgeInsets.all(8),
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SizedBox(),
                   ),
-                  child: LoginFormWidget(),
-                ),
-              ],
+                  Text('TODO App', style: Theme.of(context).textTheme.headline6!.apply(color: Colors.white)),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white38,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: LoginFormWidget(),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

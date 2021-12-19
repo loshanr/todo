@@ -27,7 +27,7 @@ class AuthRepository {
     _firebaseAuth = FirebaseAuth.instance;
   }
 
-  Future<AuthResult> signInWithEmailAndPassword(String email, String password) async {
+  Future<AuthResult> signInWithEmailAndPassword({required String email, required String password}) async {
     try {
       UserCredential credential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       if (credential.user != null) {
@@ -40,7 +40,7 @@ class AuthRepository {
     }
   }
 
-  Future<AuthResult> signUpWithEmailAndPassword(String email, String password) async {
+  Future<AuthResult> signUpWithEmailAndPassword({required String email, required String password}) async {
     try {
       UserCredential credential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       if (credential.user != null) {
