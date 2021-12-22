@@ -8,7 +8,7 @@ class Todo extends Equatable {
   final bool completed;
   final Timestamp? createdAt;
 
-  Todo({
+  const Todo({
     required this.id,
     required this.title,
     this.description,

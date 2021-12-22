@@ -9,22 +9,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TODO'),
+        title: const Text('TODO'),
         actions: [
           IconButton(
-            icon: Icon(Icons.select_all),
+            icon: const Icon(Icons.select_all),
             onPressed: () {
               Navigator.pushNamed(context, '/add');
             },
           ),
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {
               Navigator.pushNamed(context, '/add');
             },
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () {
               Navigator.pushNamed(context, '/add');
             },
@@ -33,12 +33,12 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ListView.separated(
-          separatorBuilder: (context, index) => Divider(color: Colors.black),
+          separatorBuilder: (context, index) => const Divider(color: Colors.black),
           itemCount: 3,
           itemBuilder: (_, index) {
             return ListTile(
-              leading: Icon(Icons.radio_button_unchecked_rounded), //Icons.check_circle_rounded
-              title: Text('TODO'),
+              leading: const Icon(Icons.radio_button_unchecked_rounded), //Icons.check_circle_rounded
+              title: const Text('TODO'),
               onTap: () {
                 Navigator.pushNamed(context, '/detail');
               },
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, '/add');
         },
@@ -55,26 +55,26 @@ class HomeScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               child: Text('TODO'),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
             ListTile(
-              title: Text('Help'),
+              title: const Text('Help'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('About'),
+              title: const Text('About'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Sign Out'),
+              title: const Text('Sign Out'),
               onTap: () {
                 context.read<AppBloc>().add(AppSignoutRequested());
               },

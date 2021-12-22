@@ -35,7 +35,6 @@ class AuthRepository {
       }
       return AuthResult.fromFirebaseError('Unexpected error');
     } catch (e) {
-      print(e.toString());
       return AuthResult.fromFirebaseError(e.toString());
     }
   }
@@ -48,7 +47,6 @@ class AuthRepository {
       }
       return AuthResult.fromFirebaseError('Unexpected error');
     } catch (e) {
-      print(e.toString());
       return AuthResult.fromFirebaseError(e.toString());
     }
   }
