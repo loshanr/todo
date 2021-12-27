@@ -1,21 +1,19 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:todo_app/features/todo/todo.dart';
-import 'package:todo_app/features/todo/todo_repository.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
-  final TodoRepository _todoRepository;
+  // final TodoRepository _todoRepository;
   late final StreamSubscription _todoSubscription;
 
   HomeBloc()
-      : _todoRepository = TodoRepository(),
+      : //_todoRepository = TodoRepository(),
         super(const HomeState()) {
     on<HomeLoaded>(_onHomeLoaded);
     on<TodoLoaded>(_onTodoLoaded);

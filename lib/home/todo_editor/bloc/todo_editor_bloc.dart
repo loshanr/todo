@@ -6,8 +6,6 @@ part 'todo_editor_state.dart';
 
 class TodoEditorBloc extends Bloc<TodoeditorEvent, TodoeditorState> {
   TodoEditorBloc() : super(TodoeditorInitial()) {
-    on<TodoeditorEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<TodoeditorEvent>((event, emit) {});
   }
 }
