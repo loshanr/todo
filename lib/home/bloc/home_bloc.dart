@@ -19,9 +19,9 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     on<HomeLoaded>(_onHomeLoaded);
     on<TodoLoaded>(_onTodoLoaded);
     on<TodoAdded>(_onTodoAdded);
-    _todoSubscription = _todoRepository.getTodos().listen((todos) {
-      add(TodoLoaded(todos));
-    });
+    // _todoSubscription = _todoRepository.getTodos().listen((todos) {
+    //   add(TodoLoaded(todos));
+    // });
   }
 
   @override
