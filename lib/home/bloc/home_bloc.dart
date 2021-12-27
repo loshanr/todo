@@ -19,6 +19,7 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     on<HomeLoaded>(_onHomeLoaded);
     on<TodoLoaded>(_onTodoLoaded);
     on<TodoAdded>(_onTodoAdded);
+    on<TodoCompletedPressed>(_onTodoCompletedPressed);
     // _todoSubscription = _todoRepository.getTodos().listen((todos) {
     //   add(TodoLoaded(todos));
     // });
@@ -40,7 +41,19 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
 
   void _onTodoAdded(TodoAdded event, Emitter<HomeState> emit) {
     List<Todo> todos = List.from(state.todos);
-    todos.add(event.todo);
+    todos.insert(0, event.todo);
+    emit(state.copyWith(todos: todos));
+  }
+
+  void _onTodoCompletedPressed(TodoCompletedPressed event, Emitter<HomeState> emit) {
+    List<Todo> todos = List.from(state.todos);
+    todos.removeWhere((todo) => todo == event.todo);
+    if (!event.todo.completed) {
+      todos.add(event.todo.copyWith(completed: !event.todo.completed));
+    } else {
+      todos.insert(0, event.todo.copyWith(completed: !event.todo.completed));
+    }
+
     emit(state.copyWith(todos: todos));
   }
 
@@ -49,8 +62,6 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     try {
       return HomeState.fromMap(json);
     } catch (e) {
-      print('000000000000000');
-      print(e);
       return null;
     }
   }
@@ -60,8 +71,6 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     try {
       return state.toMap();
     } catch (e) {
-      print('1111111111111111');
-      print(e);
       return null;
     }
   }
