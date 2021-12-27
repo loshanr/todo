@@ -20,6 +20,7 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     on<TodoLoaded>(_onTodoLoaded);
     on<TodoAdded>(_onTodoAdded);
     on<TodoCompletedPressed>(_onTodoCompletedPressed);
+    on<TodoDeleted>(_onTodoDeleted);
     // _todoSubscription = _todoRepository.getTodos().listen((todos) {
     //   add(TodoLoaded(todos));
     // });
@@ -54,6 +55,12 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
       todos.insert(0, event.todo.copyWith(completed: !event.todo.completed));
     }
 
+    emit(state.copyWith(todos: todos));
+  }
+
+  void _onTodoDeleted(TodoDeleted event, Emitter<HomeState> emit) {
+    List<Todo> todos = List.from(state.todos);
+    todos.removeWhere((todo) => todo == event.todo);
     emit(state.copyWith(todos: todos));
   }
 

@@ -16,6 +16,10 @@ class TodoWidget extends StatelessWidget {
       ),
       title: Text(todo.title),
       subtitle: Text(todo.description ?? ''),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete_rounded),
+        onPressed: () => context.read<HomeBloc>().add(TodoDeleted(todo)),
+      ),
       onTap: () {
         // Navigator.pushNamed(context, '/detail');
       },
