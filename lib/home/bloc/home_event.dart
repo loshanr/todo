@@ -17,3 +17,12 @@ class TodoLoaded extends HomeEvent {
   @override
   List<Object> get props => [todos];
 }
+
+class TodoAdded extends HomeEvent {
+  final Todo todo;
+
+  const TodoAdded(this.todo);
+
+  @override
+  List<Object> get props => [todo];
+}

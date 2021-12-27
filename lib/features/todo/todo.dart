@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Todo extends Equatable {
-  final String id;
+  final String? id;
   final String title;
   final String? description;
   final bool completed;
   final Timestamp? createdAt;
 
   const Todo({
-    required this.id,
+    this.id,
     required this.title,
     this.description,
     this.completed = false,
@@ -41,17 +41,17 @@ class Todo extends Equatable {
       'title': title,
       'description': description,
       'completed': completed,
-      'createdAt': FieldValue.serverTimestamp(),
+      // 'createdAt': FieldValue.serverTimestamp(),
     };
   }
 
   static Todo fromMap(Map<String, dynamic> map) {
     return Todo(
-      id: map['id'] as String,
-      title: map['title'] as String,
-      description: map['description'] as String?,
-      completed: map['completed'] as bool,
-      createdAt: map['createdAt'],
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      completed: map['completed'],
+      // createdAt: map['createdAt'],
     );
   }
 }

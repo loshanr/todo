@@ -10,6 +10,7 @@ class TodoWidget extends StatelessWidget {
     return ListTile(
       leading: Icon(todo.completed ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded),
       title: Text(todo.title),
+      subtitle: Text(todo.description ?? ''),
       onTap: () {
         Navigator.pushNamed(context, '/detail');
       },

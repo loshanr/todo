@@ -25,4 +25,12 @@ class HomeState extends Equatable {
       error: error ?? this.error,
     );
   }
+
+  factory HomeState.fromMap(Map<String, dynamic> map) => HomeState(
+        todos: List<Todo>.from(map['todos'].map((x) => Todo.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        'todos': List<Map<String, dynamic>>.from(todos.map((x) => x.toMap())),
+      };
 }
