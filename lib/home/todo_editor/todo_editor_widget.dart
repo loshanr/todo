@@ -1,16 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/features/todo/todo.dart';
 
 class TodoEditorWidget extends StatefulWidget {
-  const TodoEditorWidget({Key? key}) : super(key: key);
+  final Todo? todo;
+  const TodoEditorWidget({this.todo, Key? key}) : super(key: key);
 
   @override
   State<TodoEditorWidget> createState() => _TodoEditorWidgetState();
 }
 
 class _TodoEditorWidgetState extends State<TodoEditorWidget> {
-  late String? todoTitle;
-  late String? todoDescription;
+  late String? todoTitle = widget.todo?.title;
+  late String? todoDescription = widget.todo?.description;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class _TodoEditorWidgetState extends State<TodoEditorWidget> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Create Todo', style: Theme.of(context).textTheme.headline5),
+            Text(widget.todo != null ? 'Update Todo' : 'Create Todo', style: Theme.of(context).textTheme.headline5),
             const SizedBox(height: 8),
             TextFormField(
               decoration: InputDecoration(
@@ -30,6 +32,7 @@ class _TodoEditorWidgetState extends State<TodoEditorWidget> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              initialValue: widget.todo?.title,
               onChanged: (value) => todoTitle = value,
             ),
             const SizedBox(height: 8),
@@ -40,15 +43,18 @@ class _TodoEditorWidgetState extends State<TodoEditorWidget> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              initialValue: widget.todo?.description,
               onChanged: (value) => todoDescription = value,
             ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(todoTitle != null && todoTitle!.isNotEmpty
-                    ? Todo(title: todoTitle!, description: todoDescription)
+                    ? widget.todo != null
+                        ? widget.todo!.copyWith(title: todoTitle, description: todoDescription)
+                        : Todo(id: Timestamp.now().toString(), title: todoTitle!, description: todoDescription)
                     : null),
-                child: const Text('Create'),
+                child: Text(widget.todo != null ? 'Update' : 'Create'),
               ),
             ),
           ],

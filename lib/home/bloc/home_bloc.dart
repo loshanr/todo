@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:todo_app/features/todo/todo.dart';
@@ -21,6 +22,7 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     on<TodoAdded>(_onTodoAdded);
     on<TodoCompletedPressed>(_onTodoCompletedPressed);
     on<TodoDeleted>(_onTodoDeleted);
+    on<TodoUpdated>(_onTodoUpdated);
     // _todoSubscription = _todoRepository.getTodos().listen((todos) {
     //   add(TodoLoaded(todos));
     // });
@@ -61,6 +63,13 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
   void _onTodoDeleted(TodoDeleted event, Emitter<HomeState> emit) {
     List<Todo> todos = List.from(state.todos);
     todos.removeWhere((todo) => todo == event.todo);
+    emit(state.copyWith(todos: todos));
+  }
+
+  void _onTodoUpdated(TodoUpdated event, Emitter<HomeState> emit) {
+    List<Todo> todos = List.from(state.todos);
+    int index = todos.indexWhere((todo) => todo.id == event.todo.id);
+    todos[index] = event.todo;
     emit(state.copyWith(todos: todos));
   }
 
