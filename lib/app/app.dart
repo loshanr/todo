@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/app/bloc/app_bloc.dart';
+import 'package:todo_app/home/about_screen.dart';
+import 'package:todo_app/home/help.dart';
 import 'package:todo_app/home/home_screen.dart';
 import 'package:todo_app/login/login_screen.dart';
 import 'package:todo_app/splash_screen.dart';
@@ -41,6 +43,8 @@ class _AppState extends State<App> {
         '/': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
+        '/help': (context) => const HelpScreen(),
+        '/about': (_) => const AboutScreen(),
       },
     );
   }

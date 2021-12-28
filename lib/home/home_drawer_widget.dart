@@ -19,13 +19,13 @@ class HomeDrawerWidget extends StatelessWidget {
           ListTile(
             title: const Text('Help'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed('/help');
             },
           ),
           ListTile(
             title: const Text('About'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed('/about');
             },
           ),
           ListTile(
